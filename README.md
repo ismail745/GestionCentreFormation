@@ -19,7 +19,6 @@ Ce projet est une application web développée avec **Symfony** pour la gestion 
 - **Doctrine** (ORM pour la base de données)
 - **Bootstrap** (Interface utilisateur)
 - **API Platform** (Exposition des données en REST API)
-- **JWT Authentication** (Sécurité et gestion des sessions)
 
 ## ⚙️ Installation et Configuration
 1. **Cloner le projet** :
