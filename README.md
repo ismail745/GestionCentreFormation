@@ -8,8 +8,6 @@ Ce projet est une application web développée avec **Symfony** pour la gestion 
 - **Gestion des formateurs** : Création, affectation et suivi
 - **Gestion des stagiaires** : Inscriptions, formations suivies, certificats
 - **Gestion des inscriptions** : Interface d’inscription et suivi des paiements
-- **Gestion des salles** : Planification des formations
-- **Paiements et facturation** : Génération de factures et suivi financier
 - **Tableau de bord** : Vue globale des statistiques du centre
 - **Authentification et rôles** : Gestion sécurisée des accès (Admin, Formateur, Stagiaire)
 
