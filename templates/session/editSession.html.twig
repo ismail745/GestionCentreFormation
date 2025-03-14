@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+    {% if edit %}
+        Modification d'une session
+    {% else %}
+        Ajout d'une session
+    {% endif %}
+
+{% endblock %}
+
+{# <------- BODY -------> #}
+
+{% block body %}
+
+{% if edit %}
+    <h1>Modification d'une session</h1>
+    {% else %}
+    <h1>Ajout d'une session</h1>
+{% endif %}
+
+<section id="edit-session" class=" row py-5 justify-content-center">
+    
+    {# Affiche le formulaire récupéré depuis le SessionType #}
+    {{ form_start(form) }}
+
+    {{ form_row(form.formation, {'label': 'Intitulé de la formation :', 'attr' : {'class' : 'form-control' }} ) }}
+
+    {# Date de début et de fin de la session #}
+    <div class="row justify-content-between">
+        <div class="col-6 input-container">
+            {{ form_row(form.date_start, {'label':  "Date de début :", 'attr' : {'class' : 'form-control' }} ) }}
+        </div>
+
+        
+        <div class="col-6">
+            {{ form_row(form.date_end, {'label': 'Date de fin :', 'attr' : {'class' : 'form-control' }} ) }}
+        </div>
+    </div>
+    
+    {# Total de places disponibles #}
+    {{ form_row(form.place_number, {'label': 'Nombre total de places disponibles :', 'attr' : {'class' : 'form-control' }} ) }}
+    
+    <div class="form-group row mt-5 ">
+        <h4>Les modules de la formation :</h4>
+
+        <div id="programme-fields-list" class="remove-collection-widget"
+            data-prototype="{{ form_widget(form.programs.vars.prototype)|e }}"
+            data-session=" {{sessionId}} "
+            data-widget-tags="{{ '<p></p>'|e }}"
+            data-widget-counter="{{ form.programs|length }}">
+        {% for programmeField in form.programs %}
+            <p>
+                {{ form_errors(programmeField) }}
+                {{ form_widget(programmeField, {'attr': {'class': 'borders mb-5'}}) }}
+            </p>
+        {% endfor %}
+        
+        </div>
+    </div>
+
+    <div class="form-group row flex-action justify-content-center">
+        <button type="button" class="add-another-collection-widget button btn btn-primary btn-return" data-list-selector="#programme-fields-list">Ajouter un nouveau module</button>
+    </div>
+
+    {# empêche l'apparition d'une légende "programmes", si la collection est vide (en cas de création d'une nouvelle session) #}
+    {% do form.programs.setRendered %}
+
+    <span class="text-center">Ou</span>
+
+    {# Submit du formulaire #}
+    <div class="d-flex justify-content-center">
+        {% if edit %}
+            <button type="submit" class="btn btn-success mt-1 w-50 btn-return">Sauvegarder les modifications</button>
+            {% else %}
+            <button type="submit" class="btn btn-success mt-1 w-50 btn-return">Créer la Session</button>    
+        {% endif %}
+    </div>
+
+    {{ form_end(form)}}
+        
+</section>
+
+
+{# Boutons de retour #}
+{% if edit %}
+
+    <div class="text-center">
+        <a href="{{path('session_detail', {'id': sessionId}) }}" class="btn btn-primary btn-return">Retour au détail de la session</a>
+    </div>
+    {% else %}
+    
+    <div class="text-center">
+        <a href="{{path('app_formation') }}" class="btn btn-primary btn-return">Retour à la liste des formations</a>
+    </div>
+
+{% endif %}
+
+{% endblock %}
+    
